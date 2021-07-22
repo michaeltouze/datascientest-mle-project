@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  labels:
+    app: project_app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: project_app
+  template:
+    metadata:
+      labels:
+        app: project_app
+    spec:
+      containers:
+      - name: myapi
+        image: mtouze/my_api:latest
+        ports:
+        - containerPort: 8000

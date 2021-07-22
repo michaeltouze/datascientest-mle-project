@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+    fastapi:
+        image: mtouze/my_api:latest
+        container_name: api_from_compose
+        networks:
+            - network_from_compose
+        ports:
+            - "8000:8000"
+    permissions:
+        image: mtouze/project_permissions
+        container_name: permissions_from_compose
+        networks:
+            - network_from_compose
+        depends_on:
+            - fastapi
+    v1_sentiment:
+        image: mtouze/project_v1_sentiment
+        container_name: v1_sentiment_from_compose
+        networks:
+            - network_from_compose
+        depends_on:
+            - fastapi
+    v2_sentiment:
+        image: mtouze/project_v2_sentiment
+        container_name: v2_sentiment_from_compose
+        networks:
+            - network_from_compose
+        depends_on:
+            - fastapi
+networks:
+    network_from_compose:
